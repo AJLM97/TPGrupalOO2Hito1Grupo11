@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.Empleado" table="empleado" abstract="true">
+    	<!-- ID -->
+        <id name="idEmpleado" column="idEmpleado">
+            <generator class="identity"/>
+        </id>
+		<!-- Atributos - Columnas -->
+		<property name="nombre" column="nombre" type="string" not-null="true"/>
+		<property name="apellido" column="apellido" type="string" not-null="true"/>
+		<property name="dni" column="dni" type="string" not-null="true"/>
+		<property name="fechNacimiento" column="fechNacimiento" type="java.time.LocalDate" not-null="true"/>
+		<property name="fechaIngreso" column="fechaIngreso" type="java.time.LocalDate" not-null="true"/>
+		<property name="sueldo" column="sueldo" type="double" not-null="true"/>
+		<!-- Herencia -->
+		<joined-subclass name="datos.Cajero" table="cajero">
+			<key column="idCajero" />
+			<property column="turnoTrabajo" name="turnoTrabajo" type="string" not-null="true"/>
+			<property column="plusAntiguedad" name="plusAntiguedad" type="double" not-null="true"/>
+		</joined-subclass>
+		
+		<joined-subclass name="datos.Cocinero" table="cocinero">
+			<key column="idCocinero" />
+			<property column="categoria" name="categoria" type="string" not-null="true"/>
+			<property column="especialidad" name="especialidad" type="string" not-null="true"/>
+			<property column="porcentaje" name="porcentaje" type="integer" not-null="true"/>
+		</joined-subclass>
+	</class>
+</hibernate-mapping>

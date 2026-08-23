@@ -1,0 +1,57 @@
+package datos;
+
+import java.time.LocalDate;
+import java.util.Set;
+
+public class Pedido {
+	private long idPedido;
+	private LocalDate fechaTransaccion;
+	private UnidadVenta unidad;
+	private Set<ItemPedido> items;
+
+	public Pedido() {}
+
+	public Pedido(LocalDate fechaTransaccion, UnidadVenta unidad) {
+		super();
+		this.fechaTransaccion = fechaTransaccion;
+		this.unidad = unidad;
+	}
+
+	public long getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(long idPedido) {
+		this.idPedido = idPedido;
+	}
+
+	public LocalDate getFechaTransaccion() {
+		return fechaTransaccion;
+	}
+
+	public void setFechaTransaccion(LocalDate fechaTransaccion) {
+		this.fechaTransaccion = fechaTransaccion;
+	}
+
+	public UnidadVenta getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(UnidadVenta unidad) {
+		this.unidad = unidad;
+	}
+
+	public Set<ItemPedido> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<ItemPedido> items) {
+		this.items = items;
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido [idPedido=" + idPedido + ", fechaTransaccion=" + fechaTransaccion + "]";
+	}
+
+}

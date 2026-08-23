@@ -1,0 +1,46 @@
+package negocio;
+
+import java.util.List;
+
+import dao.ItemPedidoDao;
+import datos.ItemPedido;
+import datos.Plato;
+
+public class ItemPedidoABM {
+
+	private static ItemPedidoABM abm = null;
+	private ItemPedidoDao dao = ItemPedidoDao.getInstance();
+
+	private ItemPedidoABM() {}
+
+	public static ItemPedidoABM getInstancia() {
+		if(abm == null) {
+			abm = new ItemPedidoABM();
+		}
+		return abm;
+	}
+
+	public int agregar(Plato plato, long cantidad) {
+		ItemPedido aux = new ItemPedido(plato, cantidad);
+		return dao.agregar(aux);
+	}
+
+	public void modificar(ItemPedido itemPedido) {
+		dao.actualizar(itemPedido);
+	}
+
+	public void eliminar(long idItemPedido) {
+		ItemPedido aux = dao.traer(idItemPedido);
+		dao.eliminar(aux);
+	}
+	
+	public ItemPedido traerItemPedido(long idItemPedido) {
+		ItemPedido aux = dao.traer(idItemPedido);
+		return aux;
+	}
+
+	public List<ItemPedido> traerItemPedido() {
+		return dao.traer();
+	}
+	
+}
