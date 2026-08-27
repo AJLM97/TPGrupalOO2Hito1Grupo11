@@ -3,14 +3,15 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="datos.ItemPedido" table="pedido">
+    <class name="datos.ItemPedido" table="itempedido">
     	<!-- ID -->
         <id name="idItemPedido" column="idItemPedido">
             <generator class="identity"/>
         </id>
 		<!-- Atributos - Columnas -->
-        <property name="cantidad" column="cantidad" type="integer" not-null="true"/>
+        <property name="cantidad" column="cantidad" type="long" not-null="true"/>
 	    
+	    <many-to-one name="pedido" class="datos.Pedido" column="idPedido" not-null="true"/>
 	    <many-to-one name="plato" class="datos.Plato" column="idPlato" not-null="true"/>
 	</class>    
 </hibernate-mapping>

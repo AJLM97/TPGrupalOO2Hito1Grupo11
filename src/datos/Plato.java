@@ -1,10 +1,13 @@
 package datos;
 
+import java.util.Set;
+
 public class Plato {
 	private long idPlato;
 	private String nombre;
 	private double precioVenta;
 	private double costoProduccion;
+	private Set<UnidadVenta> unidades;
 
 	public Plato() {}
 
@@ -19,7 +22,7 @@ public class Plato {
 		return idPlato;
 	}
 
-	public void setIdPlato(long idPlato) {
+	protected void setIdPlato(long idPlato) {
 		this.idPlato = idPlato;
 	}
 
@@ -45,6 +48,14 @@ public class Plato {
 
 	public void setCostoProduccion(double costoProduccion) {
 		this.costoProduccion = costoProduccion;
+	}
+
+	public Set<UnidadVenta> getUnidades() {
+	    return unidades;
+	}
+
+	public void setUnidades(Set<UnidadVenta> unidades) {
+	    this.unidades = unidades;
 	}
 
 	@Override

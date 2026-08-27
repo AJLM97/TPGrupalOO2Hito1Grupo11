@@ -11,10 +11,10 @@
 		<!-- Atributos - Columnas -->
 		<property name="nombre" column="nombre" type="string" not-null="true"/>
 		<property name="apellido" column="apellido" type="string" not-null="true"/>
-		<property name="dni" column="dni" type="string" not-null="true"/>
+		<property name="dni" column="dni" type="long" not-null="true"/>
 		<property name="fechNacimiento" column="fechNacimiento" type="java.time.LocalDate" not-null="true"/>
 		<property name="fechaIngreso" column="fechaIngreso" type="java.time.LocalDate" not-null="true"/>
-		<property name="sueldo" column="sueldo" type="double" not-null="true"/>
+		<property name="sueldoBase" column="sueldoBase" type="double" not-null="true"/>
 		<!-- Herencia -->
 		<joined-subclass name="datos.Cajero" table="cajero">
 			<key column="idCajero" />
@@ -24,9 +24,9 @@
 		
 		<joined-subclass name="datos.Cocinero" table="cocinero">
 			<key column="idCocinero" />
-			<property column="categoria" name="categoria" type="string" not-null="true"/>
+			<property column="categoria" name="categoria" type="long" not-null="true"/>
 			<property column="especialidad" name="especialidad" type="string" not-null="true"/>
-			<property column="porcentaje" name="porcentaje" type="integer" not-null="true"/>
+			<property column="porcentaje" name="porcentaje" type="long" not-null="true"/>
 		</joined-subclass>
 	</class>
 </hibernate-mapping>

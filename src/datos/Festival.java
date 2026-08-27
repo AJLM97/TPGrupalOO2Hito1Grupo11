@@ -32,7 +32,7 @@ public class Festival {
 		return idFestival;
 	}
 
-	public void setIdFestival(long idFestival) {
+	protected void setIdFestival(long idFestival) {
 		this.idFestival = idFestival;
 	}
 

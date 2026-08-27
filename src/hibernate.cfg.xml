@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"><hibernate-configuration>
@@ -14,12 +15,12 @@
 		<property name="show_sql">true</property><!-- en true muestra hql en consola-->
 		<property name="format_sql">true</property><!-- en true se ve mas legible el hql en consola-->
 
-    <!--Mapeo Entidades   -->
-      <mapping resource="mapeos/Empleado.hbm.xml"/>   
-      <mapping resource="mapeos/Plato.hbm.xml"/> 
-      <mapping resource="mapeos/Pedido.hbm.xml"/>
-      <mapping resource="mapeos/ItemPedido.hbm.xml"/>
-      <mapping resource="mapeos/UnidadVenta.hbm.xml"/>
-      <mapping resource="mapeos/Festival.hbm.xml"/>
+	    <!--Mapeo Entidades   -->
+	      <mapping resource="mapeos/Empleado.hbm.xml"/>   
+	      <mapping resource="mapeos/Plato.hbm.xml"/> 
+	      <mapping resource="mapeos/Pedido.hbm.xml"/>
+	      <mapping resource="mapeos/ItemPedido.hbm.xml"/>
+	      <mapping resource="mapeos/UnidadVenta.hbm.xml"/>
+	      <mapping resource="mapeos/Festival.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

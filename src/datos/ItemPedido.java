@@ -3,6 +3,7 @@ package datos;
 public class ItemPedido {
 	private long idItemPedido;
 	private Plato plato;
+	private Pedido pedido;
 	private long cantidad;
 
 	public ItemPedido() {}
@@ -17,7 +18,7 @@ public class ItemPedido {
 		return idItemPedido;
 	}
 
-	public void setIdItemPedido(long idItemPedido) {
+	protected void setIdItemPedido(long idItemPedido) {
 		this.idItemPedido = idItemPedido;
 	}
 
@@ -27,6 +28,14 @@ public class ItemPedido {
 
 	public void setPlato(Plato plato) {
 		this.plato = plato;
+	}
+	
+	public Pedido getPedido() {
+	    return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+	    this.pedido = pedido;
 	}
 
 	public long getCantidad() {
