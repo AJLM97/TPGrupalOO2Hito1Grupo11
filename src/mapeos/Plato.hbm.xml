@@ -13,7 +13,7 @@
 	    <property name="precioVenta" column="precioVenta" type="double" not-null="true"/>
 	    <property name="costoProduccion" column="costoProduccion" type="double" not-null="true"/>
 	    
-	    <set name="unidades" table="plato_unidadventa">
+	    <set name="unidades" table="plato_unidadventa" outer-join="true">
     		<key column="idPlato"/>
     		<many-to-many class="datos.UnidadVenta" column="idUnidadVenta"/>
 		</set>

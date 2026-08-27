@@ -18,7 +18,7 @@
 		    <many-to-many class="datos.Empleado" column="idEmpleado"/>
 		</set>
 	    
-	    <set name="platos" table="plato_unidadventa" inverse="true" lazy="true" fetch="select">
+	    <set name="platos" table="plato_unidadventa" outer-join="true">
 		    <key column="idUnidadVenta"/>
 		    <many-to-many class="datos.Plato" column="idPlato"/>
 		</set>
