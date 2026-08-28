@@ -43,5 +43,9 @@ public class PedidoABM {
 	public List<Pedido> traerPedido() {
 		return dao.traer();
 	}
+
+	public double calcularRecaudacionTotalEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		return dao.calcularRecaudacionTotalEntreFechas(fechaDesde, fechaHasta);
+	}
 	
 }
