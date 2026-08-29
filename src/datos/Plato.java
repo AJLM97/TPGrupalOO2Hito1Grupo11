@@ -1,23 +1,20 @@
 package datos;
 
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
-
 public class Plato {
 	private long idPlato;
 	private String nombre;
 	private double precioVenta;
 	private double costoProduccion;
-	private Set<UnidadVenta> unidades;
+	private UnidadVenta unidad;
 
 	public Plato() {}
 
-	public Plato(String nombre, double precioVenta, double costoProduccion) {
+	public Plato(String nombre, double precioVenta, double costoProduccion, UnidadVenta unidad) {
 		super();
 		this.nombre = nombre;
 		this.precioVenta = precioVenta;
 		this.costoProduccion = costoProduccion;
+		this.unidad = unidad;
 	}
 
 	public long getIdPlato() {
@@ -51,44 +48,13 @@ public class Plato {
 	public void setCostoProduccion(double costoProduccion) {
 		this.costoProduccion = costoProduccion;
 	}
-
-	public Set<UnidadVenta> getUnidades() {
-	    return unidades;
-	}
-
-	protected void setUnidades(Set<UnidadVenta> unidades) {
-	    this.unidades = unidades;
-	}
 	
-	@Override
-	public int hashCode() {
-		return Objects.hash(idPlato);
+	public UnidadVenta getUnidad() {
+		return unidad;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		Plato other = (Plato) obj;
-		return idPlato == other.idPlato;
-	}
-	
-	public boolean agregar(UnidadVenta unidad) {
-		boolean agregar = false;
-		if(!(unidades.contains(unidad))) {
-			agregar = unidades.add(unidad);
-		}
-		return agregar;
-	}
-	
-	public boolean eliminar(UnidadVenta unidad) {
-		UnidadVenta borrar = null;
-		boolean eliminar = false;
-		Iterator<UnidadVenta> it = unidades.iterator();
-		while((it.hasNext()) && (borrar==null)) {
-			UnidadVenta aux = it.next();
-			if(aux.equals(unidad)) borrar = aux;
-		}
-		eliminar = unidades.remove(borrar);
-		return eliminar;
+	public void setUnidad(UnidadVenta unidad) {
+		this.unidad = unidad;
 	}
 
 	@Override

@@ -10,11 +10,12 @@ public abstract class Empleado {
 	protected LocalDate fechNacimiento;
 	protected LocalDate fechaIngreso;
 	protected double sueldoBase;
+	protected UnidadVenta unidad;
 	
 	public Empleado() {}
 
 	public Empleado(String nombre, String apellido, long dni, LocalDate fechNacimiento,
-			LocalDate fechaIngreso, double sueldoBase) {
+			LocalDate fechaIngreso, double sueldoBase, UnidadVenta unidad) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -22,6 +23,7 @@ public abstract class Empleado {
 		this.fechNacimiento = fechNacimiento;
 		this.fechaIngreso = fechaIngreso;
 		this.sueldoBase = sueldoBase;
+		this.unidad = unidad;
 	}
 
 	public long getIdEmpleado() {
@@ -78,6 +80,14 @@ public abstract class Empleado {
 
 	public void setSueldoBase(double sueldoBase) {
 		this.sueldoBase = sueldoBase;
+	}
+	
+	public UnidadVenta getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(UnidadVenta unidad) {
+		this.unidad = unidad;
 	}
 
 	@Override
