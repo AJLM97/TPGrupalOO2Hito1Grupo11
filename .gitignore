@@ -23,3 +23,6 @@ Thumbs.db
 *.log
 *.tmp
 *.swp
+
+# Configuracion local de Maven del entorno personal
+pom.xml
