@@ -13,6 +13,6 @@
 	    <property name="precioVenta" column="precioVenta" type="double" not-null="true"/>
 	    <property name="costoProduccion" column="costoProduccion" type="double" not-null="true"/>
 	    
-	    <many-to-one name="unidad" class="datos.UnidadVenta" column="idUnidadVenta" not-null="true"/>
+	    <many-to-one name="unidad" class="datos.UnidadVenta" column="idUnidadVenta"/>
 	</class>
 </hibernate-mapping>
