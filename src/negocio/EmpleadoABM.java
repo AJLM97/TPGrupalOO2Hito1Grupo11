@@ -5,7 +5,6 @@ import java.util.List;
 
 import dao.EmpleadoDao;
 import datos.Empleado;
-import datos.UnidadVenta;
 import datos.Cajero;
 import datos.Cocinero;
 
@@ -24,16 +23,16 @@ public class EmpleadoABM {
 	}
 
 	public int agregarCajero(String nombre, String apellido, long dni, LocalDate fechNacimiento, LocalDate fechaIngreso,
-			double sueldoBase, String turnoTrabajo, double plusAntiguedad, UnidadVenta unidad) {
+			double sueldoBase, String turnoTrabajo, double plusAntiguedad) {
 		Cajero aux = new Cajero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
-				sueldoBase, turnoTrabajo, plusAntiguedad, unidad);
+				sueldoBase, turnoTrabajo, plusAntiguedad);
 		return dao.agregar(aux);
 	}
 	
 	public int agregarCocinero(String nombre, String apellido, long dni, LocalDate fechNacimiento, LocalDate fechaIngreso,
-			double sueldoBase, long categoria, String especialidad, long porcentaje, UnidadVenta unidad) {
+			double sueldoBase, long categoria, String especialidad, long porcentaje) {
 		Cocinero aux = new Cocinero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
-				sueldoBase, categoria, especialidad, porcentaje, unidad);
+				sueldoBase, categoria, especialidad, porcentaje);
 		return dao.agregar(aux);
 	}
 

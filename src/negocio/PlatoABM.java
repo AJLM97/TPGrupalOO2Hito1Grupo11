@@ -4,7 +4,6 @@ import java.util.List;
 
 import dao.PlatoDao;
 import datos.Plato;
-import datos.UnidadVenta;
 
 public class PlatoABM {
 
@@ -20,8 +19,8 @@ public class PlatoABM {
 		return abm;
 	}
 
-	public int agregar(String nombre, double precioVenta, double costoProduccion, UnidadVenta unidad) {
-		Plato aux = new Plato(nombre, precioVenta, costoProduccion, unidad);
+	public int agregar(String nombre, double precioVenta, double costoProduccion) {
+		Plato aux = new Plato(nombre, precioVenta, costoProduccion);
 		return dao.agregar(aux);
 	}
 

@@ -15,7 +15,7 @@ public abstract class Empleado {
 	public Empleado() {}
 
 	public Empleado(String nombre, String apellido, long dni, LocalDate fechNacimiento,
-			LocalDate fechaIngreso, double sueldoBase, UnidadVenta unidad) {
+			LocalDate fechaIngreso, double sueldoBase) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -23,7 +23,6 @@ public abstract class Empleado {
 		this.fechNacimiento = fechNacimiento;
 		this.fechaIngreso = fechaIngreso;
 		this.sueldoBase = sueldoBase;
-		this.unidad = unidad;
 	}
 
 	public long getIdEmpleado() {
