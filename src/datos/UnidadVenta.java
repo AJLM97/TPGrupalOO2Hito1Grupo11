@@ -1,5 +1,7 @@
 package datos;
 
+import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 public abstract class UnidadVenta {
@@ -84,8 +86,39 @@ public abstract class UnidadVenta {
 		return platos;
 	}
 
-	public void setPlatos(Set<Plato> platos) {
+	protected void setPlatos(Set<Plato> platos) {
 		this.platos = platos;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(idUnidadVenta);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		UnidadVenta other = (UnidadVenta) obj;
+		return idUnidadVenta == other.idUnidadVenta;
+	}
+	
+	public boolean agregar(Plato plato) {
+		boolean agregar = false;
+		if(!(platos.contains(plato))) {
+			agregar = platos.add(plato);
+		}
+		return agregar;
+	}
+	
+	public boolean eliminar(Plato plato) {
+		Plato borrar = null;
+		boolean eliminar = false;
+		Iterator<Plato> it = platos.iterator();
+		while((it.hasNext()) && (borrar==null)) {
+			Plato aux = it.next();
+			if(aux.equals(plato)) borrar = aux;
+		}
+		eliminar = platos.remove(borrar);
+		return eliminar;
 	}
 
 	@Override

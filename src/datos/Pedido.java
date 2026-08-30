@@ -8,6 +8,7 @@ public class Pedido {
 	private LocalDate fechaTransaccion;
 	private UnidadVenta unidad;
 	private Set<ItemPedido> items;
+	private boolean cerrado;
 
 	public Pedido() {}
 
@@ -15,6 +16,7 @@ public class Pedido {
 		super();
 		this.fechaTransaccion = fechaTransaccion;
 		this.unidad = unidad;
+		this.cerrado = false;
 	}
 
 	public long getIdPedido() {
@@ -47,6 +49,14 @@ public class Pedido {
 
 	public void setItems(Set<ItemPedido> items) {
 		this.items = items;
+	}
+
+	public boolean isCerrado() {
+		return cerrado;
+	}
+
+	public void setCerrado(boolean cerrado) {
+		this.cerrado = cerrado;
 	}
 
 	@Override

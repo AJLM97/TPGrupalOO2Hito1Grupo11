@@ -13,23 +13,23 @@
 	    <property name="codigo" column="codigo" type="string" not-null="true"/>
 	    <property name="superficie" column="superficie" type="double" not-null="true"/>
 	    
-	    <set name="staff" table="unidadventa_empleado" order-by="idEmpleado asc" lazy="true" fetch="select">
+	    <set name="staff" table="empleado" order-by="idEmpleado asc" inverse="true" lazy="true" fetch="select">
 		    <key column="idUnidadVenta"/>
-		    <many-to-many class="datos.Empleado" column="idEmpleado"/>
+		    <one-to-many class="datos.Empleado"/>
 		</set>
 	    
-	    <set name="platos" table="plato_unidadventa" inverse="true" lazy="true" fetch="select">
+	    <set name="platos" table="plato" order-by="idPlato asc" inverse="true" lazy="true" fetch="select">
 		    <key column="idUnidadVenta"/>
-		    <many-to-many class="datos.Plato" column="idPlato"/>
+		    <one-to-many class="datos.Plato"/>
 		</set>
 	    
 	    <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true"/>
 	    
-	    <many-to-one name="responsable" class="datos.Empleado" column="idResponsable" not-null="true"/>
+	    <many-to-one name="responsable" class="datos.Empleado" column="idEmpleado" not-null="true"/>
 	    
 	    <!-- Herencia -->
 		<joined-subclass name="datos.PuestoDesarmable" table="puestodesarmable">
-			<key column="idPuestoDesarmable" />
+			<key column="idPuestoDesarmable"/>
 			<property column="cantidadDeCarpas" name="cantidadDeCarpas" type="integer" not-null="true"/>
 			<property column="tiempoMontaje" name="tiempoMontaje" type="integer" not-null="true"/>
 		</joined-subclass>

@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -93,6 +94,20 @@ public class UnidadVentaDao {
 			session.close();
 		}
 		return lista;
+	}
+	
+	public UnidadVenta traerUnidadYPlatos(long idUnidadVenta) {
+		UnidadVenta objeto = null;
+		try {
+			iniciaOperacion();
+			String hql = "from UnidadVenta u where u.idUnidadVenta =:idUnidadVenta";
+			objeto = (UnidadVenta) session.createQuery(hql).setParameter("idUnidadVenta", idUnidadVenta)
+					.uniqueResult();
+			Hibernate.initialize(objeto.getPlatos());
+		} finally {
+			session.close();
+		}
+		return objeto;
 	}
 	
 }

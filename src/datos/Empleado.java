@@ -10,6 +10,7 @@ public abstract class Empleado {
 	protected LocalDate fechNacimiento;
 	protected LocalDate fechaIngreso;
 	protected double sueldoBase;
+	protected UnidadVenta unidad;
 	
 	public Empleado() {}
 
@@ -78,6 +79,14 @@ public abstract class Empleado {
 
 	public void setSueldoBase(double sueldoBase) {
 		this.sueldoBase = sueldoBase;
+	}
+	
+	public UnidadVenta getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(UnidadVenta unidad) {
+		this.unidad = unidad;
 	}
 
 	@Override
