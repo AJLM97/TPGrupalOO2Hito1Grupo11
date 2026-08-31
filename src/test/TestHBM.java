@@ -1,17 +1,16 @@
 package test;
 
-import java.time.LocalDate;
+import org.hibernate.Session;
 
-import negocio.PedidoABM;
+import dao.HibernateUtil;
 
 public class TestHBM {
 
-    public static void main(String[] args) {
-        double recaudacion = PedidoABM.getInstancia()
-                .calcularRecaudacionTotalEntreFechas(
-                        LocalDate.of(2026, 1, 1),
-                        LocalDate.of(2026, 12, 31));
-
-        System.out.println("Recaudación total: " + recaudacion);
-    }
+	public static void main(String[] args) {
+	    Session session = HibernateUtil.getSessionFactory().openSession();
+	    session.beginTransaction();
+	    session.close();
+	    System.out.println("OK");
+	}
+	
 }

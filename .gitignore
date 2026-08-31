@@ -26,3 +26,6 @@ Thumbs.db
 
 # Configuracion local de Maven del entorno personal
 pom.xml
+
+# Módulo local o demo no compartido por el equipo
+demo/

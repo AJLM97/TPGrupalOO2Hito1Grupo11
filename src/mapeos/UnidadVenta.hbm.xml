@@ -25,13 +25,13 @@
 	    
 	    <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true"/>
 	    
-	    <many-to-one name="responsable" class="datos.Empleado" column="idEmpleado" not-null="true"/>
+	    <many-to-one name="responsable" class="datos.Empleado" column="idResponsable" not-null="true"/>
 	    
 	    <!-- Herencia -->
 		<joined-subclass name="datos.PuestoDesarmable" table="puestodesarmable">
 			<key column="idPuestoDesarmable"/>
-			<property column="cantidadDeCarpas" name="cantidadDeCarpas" type="integer" not-null="true"/>
-			<property column="tiempoMontaje" name="tiempoMontaje" type="integer" not-null="true"/>
+			<property column="cantidadDeCarpas" name="cantidadDeCarpas" type="long" not-null="true"/>
+			<property column="tiempoMontaje" name="tiempoMontaje" type="long" not-null="true"/>
 		</joined-subclass>
 		
 		<joined-subclass name="datos.FoodTruck" table="foodtruck">

@@ -4,54 +4,63 @@ import java.time.LocalDate;
 import java.util.List;
 
 import dao.EmpleadoDao;
-import datos.Empleado;
 import datos.Cajero;
 import datos.Cocinero;
+import datos.Empleado;
+import datos.UnidadVenta;
 
 public class EmpleadoABM {
 
-	private static EmpleadoABM abm = null;
-	private EmpleadoDao dao = EmpleadoDao.getInstance();
+    private static EmpleadoABM abm = null;
+    private EmpleadoDao dao = EmpleadoDao.getInstance();
 
-	private EmpleadoABM() {}
+    private EmpleadoABM() {}
 
-	public static EmpleadoABM getInstancia() {
-		if(abm == null) {
-			abm = new EmpleadoABM();
-		}
-		return abm;
-	}
+    public static EmpleadoABM getInstancia() {
+        if(abm == null) {
+            abm = new EmpleadoABM();
+        }
+        return abm;
+    }
 
-	public int agregarCajero(String nombre, String apellido, long dni, LocalDate fechNacimiento, LocalDate fechaIngreso,
-			double sueldoBase, String turnoTrabajo, double plusAntiguedad) {
-		Cajero aux = new Cajero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
-				sueldoBase, turnoTrabajo, plusAntiguedad);
-		return dao.agregar(aux);
-	}
-	
-	public int agregarCocinero(String nombre, String apellido, long dni, LocalDate fechNacimiento, LocalDate fechaIngreso,
-			double sueldoBase, long categoria, String especialidad, long porcentaje) {
-		Cocinero aux = new Cocinero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
-				sueldoBase, categoria, especialidad, porcentaje);
-		return dao.agregar(aux);
-	}
+    public int agregarCajero(String nombre, String apellido, long dni,
+            LocalDate fechNacimiento, LocalDate fechaIngreso, double sueldoBase,
+            String turnoTrabajo, double plusAntiguedad) {
+        return agregarCajero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
+                sueldoBase, turnoTrabajo, plusAntiguedad, null);
+    }
 
-	public void modificar(Empleado empleado) {
-		dao.actualizar(empleado);
-	}
+    public int agregarCajero(String nombre, String apellido, long dni,
+            LocalDate fechNacimiento, LocalDate fechaIngreso, double sueldoBase,
+            String turnoTrabajo, double plusAntiguedad, UnidadVenta unidad) {
+        Cajero aux = new Cajero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
+                sueldoBase, turnoTrabajo, plusAntiguedad);
+        aux.setUnidad(unidad);
+        return dao.agregar(aux);
+    }
 
-	public void eliminar(long idEmpleado) {
-		Empleado aux = dao.traer(idEmpleado);
-		dao.eliminar(aux);
-	}
-	
-	public Empleado traerEmpleado(long idEmpleado) {
-		Empleado aux = dao.traer(idEmpleado);
-		return aux;
-	}
+    public int agregarCocinero(String nombre, String apellido, long dni,
+            LocalDate fechNacimiento, LocalDate fechaIngreso, double sueldoBase,
+            long categoria, String especialidad, long porcentaje) {
+        Cocinero aux = new Cocinero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
+                sueldoBase, categoria, especialidad, porcentaje);
+        return dao.agregar(aux);
+    }
 
-	public List<Empleado> traerEmpleado() {
-		return dao.traer();
-	}
-	
+    public void modificar(Empleado empleado) {
+        dao.actualizar(empleado);
+    }
+
+    public void eliminar(long idEmpleado) {
+        Empleado aux = dao.traer(idEmpleado);
+        dao.eliminar(aux);
+    }
+
+    public Empleado traerEmpleado(long idEmpleado) {
+        return dao.traer(idEmpleado);
+    }
+
+    public List<Empleado> traerEmpleado() {
+        return dao.traer();
+    }
 }

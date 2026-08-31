@@ -18,12 +18,11 @@ public class HibernateUtil {
 				Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
 				sessionFactory = metaData.getSessionFactoryBuilder().build();
 			}
-		} catch (HibernateException he) {
-			System.err.println("ERROR en la inicialización de la SessionFactory: " + he);
-			throw new ExceptionInInitializerError(he);
+			return sessionFactory;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error inicializando Hibernate", e);
 		}
-
-		return sessionFactory;
 	}
 	
 }
