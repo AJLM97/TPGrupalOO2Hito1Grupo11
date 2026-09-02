@@ -83,7 +83,6 @@ public class TestAgregarPedidoAFoodTruck {
 			System.out.println("Item: " + item.getPlato().getNombre() + " - cantidad: " + item.getCantidad());
 		}
 
-		// Cerrar el pedido
 		pedidoABM.cerrarPedido(idPedido);
 		Pedido pedidoCerrado = pedidoABM.traerPedido(idPedido);
 		System.out.println("Pedido cerrado: " + pedidoCerrado.isCerrado());

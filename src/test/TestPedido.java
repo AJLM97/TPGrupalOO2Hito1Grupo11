@@ -14,7 +14,6 @@ public class TestPedido {
 	public static void main(String[] args) {
 		System.out.println("=== TestPedido ===");
 
-		// Crear infraestructura necesaria
 		FestivalABM festivalABM = FestivalABM.getInstancia();
 		long idFestival = festivalABM.agregar(
 				"Festival de Otoño",

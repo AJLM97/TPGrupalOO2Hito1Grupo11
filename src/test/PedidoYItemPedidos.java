@@ -73,13 +73,11 @@ public class PedidoYItemPedidos {
 			System.out.println(item);
 		}
 
-		// Cerrar el pedido
 		pedidoABM.cerrarPedido(idPedido);
 		Pedido pedidoCerrado = pedidoABM.traerPedidoYItemPedidos(idPedido);
 		System.out.println("Pedido cerrado (después): " + pedidoCerrado.isCerrado());
 		System.out.println("Pedido final: " + pedidoCerrado);
 		
-		// Intentar agregar un item a un pedido cerrado
 		System.out.println("\n--- Intentando agregar item a pedido cerrado ---");
 		try {
 			long idPlato3 = platoABM.agregar("Refajo", 150.0, 50.0, foodTruck);
