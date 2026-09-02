@@ -16,6 +16,14 @@ public class Plato {
 		this.costoProduccion = costoProduccion;
 	}
 
+	public Plato(String nombre, double precioVenta, double costoProduccion, UnidadVenta unidad) {
+		super();
+		this.nombre = nombre;
+		this.precioVenta = precioVenta;
+		this.costoProduccion = costoProduccion;
+		this.unidad = unidad;
+	}
+
 	public long getIdPlato() {
 		return idPlato;
 	}

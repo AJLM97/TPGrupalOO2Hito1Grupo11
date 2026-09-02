@@ -24,6 +24,10 @@ public class ItemPedidoABM {
 		ItemPedido aux = new ItemPedido(plato, cantidad);
 		return dao.agregar(aux);
 	}
+	
+	public int agregar(ItemPedido itemPedido) {
+		return dao.agregar(itemPedido);
+	}
 
 	public void modificar(ItemPedido itemPedido) {
 		dao.actualizar(itemPedido);

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import dao.PedidoDao;
+import datos.ItemPedido;
 import datos.Pedido;
 import datos.UnidadVenta;
 
@@ -42,6 +43,30 @@ public class PedidoABM {
 
 	public List<Pedido> traerPedido() {
 		return dao.traer();
+	}
+	
+	public Pedido traerPedidoYItemPedidos(long idPedido) {
+		return dao.traerPedidoYItems(idPedido);
+	}
+	
+	public void agregarItemPedido(long idPedido, ItemPedido itemPedido) {
+		Pedido pedido = dao.traer(idPedido);
+		if (pedido != null && pedido.isCerrado()) {
+			throw new IllegalStateException("No se pueden agregar items a un pedido cerrado. ID Pedido: " + idPedido);
+		}
+		dao.agregarItemPedido(idPedido, itemPedido);
+	}
+	
+	public void cerrarPedido(long idPedido) {
+		Pedido pedido = dao.traer(idPedido);
+		if (pedido != null) {
+			pedido.setCerrado(true);
+			dao.actualizar(pedido);
+		}
+	}
+
+	public double calcularRecaudacionTotalEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		return dao.calcularRecaudacionTotalEntreFechas(fechaDesde, fechaHasta);
 	}
 	
 }

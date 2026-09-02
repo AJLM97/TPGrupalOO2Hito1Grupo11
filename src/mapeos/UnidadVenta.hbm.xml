@@ -25,7 +25,7 @@
 	    
 	    <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true"/>
 	    
-	    <many-to-one name="responsable" class="datos.Empleado" column="idEmpleado" not-null="true"/>
+	    <many-to-one name="responsable" class="datos.Empleado" column="idResponsable" not-null="true"/>
 	    
 	    <!-- Herencia -->
 		<joined-subclass name="datos.PuestoDesarmable" table="puestodesarmable">
