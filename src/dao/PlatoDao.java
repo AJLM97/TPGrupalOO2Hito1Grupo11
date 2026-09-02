@@ -28,20 +28,27 @@ public class PlatoDao {
 	}
 	
 	protected void manejaExcepcion(HibernateException he) throws HibernateException {
-		tx.rollback();
-		throw new HibernateException("ERROR en la capa de acceso a datos", he);
+		if (tx != null && tx.isActive()) {
+			tx.rollback();
+		}
+		throw new HibernateException("ERROR en la capa de acceso a datos" + he.getMessage());
 	}
 	
 	public int agregar(Plato objeto) {
 		int id = 0;
 		try {
+			if(existePlatoSinAsignarUnidadVenta(objeto.getNombre())) {
+				throw new HibernateException("Ya existe un plato con el mismo nombre sin asignar a una unidad de venta.");
+			}
 			iniciaOperacion();
 			id = Integer.parseInt(session.save(objeto).toString());
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return id;
 	}
@@ -55,7 +62,9 @@ public class PlatoDao {
 			manejaExcepcion(he);
 			throw he;
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 	}
 
@@ -68,7 +77,9 @@ public class PlatoDao {
 			manejaExcepcion(he);
 			throw he;
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 	}
 	
@@ -79,7 +90,9 @@ public class PlatoDao {
 			objeto = (Plato) session.createQuery("from Plato c where c.idPlato=:idPlato")
 						.setParameter("idPlato", idPlato).uniqueResult();
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return objeto;
 	}
@@ -90,9 +103,26 @@ public class PlatoDao {
 			iniciaOperacion();
 			lista = session.createQuery("from Plato", Plato.class).list();
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return lista;
+	}
+
+	public boolean existePlatoSinAsignarUnidadVenta(String nombre) {
+		boolean resultado = false;
+		try {
+			iniciaOperacion();
+			Long count = (Long) session.createQuery("select count(p) from Plato p where p.unidad.idUnidadVenta is null and p.nombre = :nombre")
+					.setParameter("nombre", nombre).uniqueResult();
+			resultado = (count != null && count > 0);
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return resultado;
 	}
 	
 }
