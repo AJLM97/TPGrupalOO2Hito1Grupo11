@@ -68,9 +68,13 @@ public class TestAgregarPedidoAFoodTruck {
 		ItemPedido item2 = new ItemPedido(plato2, 3);
 		ItemPedido item3 = new ItemPedido(plato3, 1);
 
-		pedidoABM.agregarItemPedido(idPedido, item1);
-		pedidoABM.agregarItemPedido(idPedido, item2);
-		pedidoABM.agregarItemPedido(idPedido, item3);
+		try {
+			pedidoABM.agregarItemPedido(idPedido, item1);
+			pedidoABM.agregarItemPedido(idPedido, item2);
+			pedidoABM.agregarItemPedido(idPedido, item3);
+		} catch (IllegalStateException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 
 		Pedido pedido = pedidoABM.traerPedidoYItemPedidos(idPedido);
 		Set<ItemPedido> items = pedido.getItems();
@@ -79,9 +83,10 @@ public class TestAgregarPedidoAFoodTruck {
 			System.out.println("Item: " + item.getPlato().getNombre() + " - cantidad: " + item.getCantidad());
 		}
 
-		pedido.setCerrado(true);
-		pedidoABM.modificar(pedido);
-		System.out.println("Pedido cerrado: " + pedido.isCerrado());
-		System.out.println("Pedido final: " + pedido);
+		// Cerrar el pedido
+		pedidoABM.cerrarPedido(idPedido);
+		Pedido pedidoCerrado = pedidoABM.traerPedido(idPedido);
+		System.out.println("Pedido cerrado: " + pedidoCerrado.isCerrado());
+		System.out.println("Pedido final: " + pedidoCerrado);
 	}
 }

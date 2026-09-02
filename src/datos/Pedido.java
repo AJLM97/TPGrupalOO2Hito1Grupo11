@@ -61,7 +61,7 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return "Pedido [idPedido=" + idPedido + ", fechaTransaccion=" + fechaTransaccion + "]";
+		return "Pedido [idPedido=" + idPedido + ", fechaTransaccion=" + fechaTransaccion + ", cerrado=" + cerrado + "]";
 	}
 
 }

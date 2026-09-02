@@ -29,3 +29,6 @@ pom.xml
 
 # Módulo local o demo no compartido por el equipo
 demo/
+
+# Archivos de explicación local (no trackear)
+EXPLICACION_BRANCH_FEATURE_PEDIDO.md

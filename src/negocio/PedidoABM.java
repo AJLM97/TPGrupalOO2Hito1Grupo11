@@ -50,6 +50,10 @@ public class PedidoABM {
 	}
 	
 	public void agregarItemPedido(long idPedido, ItemPedido itemPedido) {
+		Pedido pedido = dao.traer(idPedido);
+		if (pedido != null && pedido.isCerrado()) {
+			throw new IllegalStateException("No se pueden agregar items a un pedido cerrado. ID Pedido: " + idPedido);
+		}
 		dao.agregarItemPedido(idPedido, itemPedido);
 	}
 	
