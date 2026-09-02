@@ -41,7 +41,9 @@ public class EmpleadoDao {
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return id;
 	}

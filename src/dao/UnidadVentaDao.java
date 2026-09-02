@@ -42,7 +42,9 @@ public class UnidadVentaDao {
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return id;
 	}

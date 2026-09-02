@@ -1,11 +1,15 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import java.util.HashSet;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.ItemPedido;
 import datos.Pedido;
 
 public class PedidoDao {
@@ -95,4 +99,60 @@ public class PedidoDao {
 		return lista;
 	}
 	
+	public Pedido traerPedidoYItems(long idPedido) {
+		Pedido objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Pedido) session.createQuery(
+					"select distinct p from Pedido p " +
+					"left join fetch p.items i " +
+					"left join fetch i.plato pl " +
+					"where p.idPedido=:idPedido",
+					Pedido.class)
+				.setParameter("idPedido", idPedido)
+				.uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	public void agregarItemPedido(long idPedido, ItemPedido itemPedido) {
+		try {
+			iniciaOperacion();
+			Pedido pedido = (Pedido) session.get(Pedido.class, idPedido);
+			if (pedido == null) {
+				throw new IllegalArgumentException("No existe el pedido con id: " + idPedido);
+			}
+			itemPedido.setPedido(pedido);
+			if (pedido.getItems() == null) {
+				pedido.setItems(new HashSet<>());
+			}
+			pedido.getItems().add(itemPedido);
+			session.save(itemPedido);
+			session.update(pedido);
+			tx.commit();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+		} finally {
+			session.close();
+		}
+	}
+
+	public double calcularRecaudacionTotalEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		try {
+			iniciaOperacion();
+			Number resultado = (Number) session.createQuery(
+					"select sum(i.cantidad * i.plato.precioVenta) "
+					+ "from Pedido p join p.items i "
+					+ "where p.fechaTransaccion between :fechaDesde and :fechaHasta")
+					.setParameter("fechaDesde", fechaDesde)
+					.setParameter("fechaHasta", fechaHasta)
+					.uniqueResult();
+			return resultado != null ? resultado.doubleValue() : 0.0;
+		} finally {
+			session.close();
+		}
+	}
+
 }
