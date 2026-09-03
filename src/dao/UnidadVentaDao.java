@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.Plato;
 import datos.UnidadVenta;
 
 public class UnidadVentaDao {
@@ -27,10 +28,12 @@ public class UnidadVentaDao {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-	
+
 	protected void manejaExcepcion(HibernateException he) throws HibernateException {
-		tx.rollback();
-		throw new HibernateException("ERROR en la capa de acceso a datos", he);
+		if (tx != null && tx.isActive()) {
+			tx.rollback();
+		}
+		throw new HibernateException("ERROR en la capa de acceso a datos" + he.getMessage());
 	}
 	
 	public int agregar(UnidadVenta objeto) {
@@ -58,7 +61,9 @@ public class UnidadVentaDao {
 			manejaExcepcion(he);
 			throw he;
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 	}
 
@@ -71,7 +76,9 @@ public class UnidadVentaDao {
 			manejaExcepcion(he);
 			throw he;
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 	}
 	
@@ -82,7 +89,9 @@ public class UnidadVentaDao {
 			objeto = (UnidadVenta) session.createQuery("from UnidadVenta c where c.idUnidadVenta=:idUnidadVenta")
 						.setParameter("idUnidadVenta", idUnidadVenta).uniqueResult();
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return objeto;
 	}
@@ -93,7 +102,9 @@ public class UnidadVentaDao {
 			iniciaOperacion();
 			lista = session.createQuery("from UnidadVenta", UnidadVenta.class).list();
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return lista;
 	}
@@ -107,9 +118,85 @@ public class UnidadVentaDao {
 					.uniqueResult();
 			Hibernate.initialize(objeto.getPlatos());
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return objeto;
+	}
+
+	public boolean existePlatoEnUnidadVenta(long idPlato, long idUnidadVenta) {
+    Session session = null;
+    try {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Long count = (Long) session.createQuery("select count(p) from Plato p where p.unidad.idUnidadVenta = :idUnidadVenta and p.idPlato = :idPlato")
+			.setParameter("idUnidadVenta", idUnidadVenta)
+			.setParameter("idPlato", idPlato)
+			.uniqueResult();
+
+        return count != null && count > 0;
+    } finally {
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
+    }
+}
+
+	public boolean existePlatoEnUnidadVenta(String nombre, long idUnidadVenta) {
+		boolean resultado = false;
+		try {
+			iniciaOperacion();
+			Long count = (Long) session.createQuery("select count(p) from Plato p where p.unidad.idUnidadVenta = :idUnidadVenta and p.nombre = :nombre")
+				.setParameter("idUnidadVenta", idUnidadVenta)
+				.setParameter("nombre", nombre)
+				.uniqueResult();
+
+			resultado = (count != null && count > 0);
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return resultado;
+	}
+
+	public boolean existePlatoSinUnidadVenta(long idPlato) {
+		boolean resultado = false;
+		try {
+			iniciaOperacion();
+			Long count = (Long) session.createQuery("select count(p) from Plato p where p.unidad is null and p.idPlato = :idPlato")
+				.setParameter("idPlato", idPlato)
+				.uniqueResult();
+
+			resultado = (count != null && count > 0);
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return resultado;
+	}
+	
+	public boolean agregarPlato(long idPlato, long idUnidadVenta) {
+		boolean resultado = false;
+		try {
+			iniciaOperacion();
+			Plato plato = (Plato) session.get(Plato.class, idPlato);
+			UnidadVenta unidadVenta = (UnidadVenta) session.get(UnidadVenta.class, idUnidadVenta);
+			unidadVenta.agregar(plato);
+			plato.setUnidad(unidadVenta);
+			session.update(plato);
+			tx.commit();
+			resultado = true;
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return resultado;
 	}
 	
 }

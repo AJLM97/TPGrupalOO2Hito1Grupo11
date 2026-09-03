@@ -7,7 +7,6 @@ import dao.EmpleadoDao;
 import datos.Cajero;
 import datos.Cocinero;
 import datos.Empleado;
-import datos.UnidadVenta;
 
 public class EmpleadoABM {
 
@@ -26,17 +25,10 @@ public class EmpleadoABM {
     public int agregarCajero(String nombre, String apellido, long dni,
             LocalDate fechNacimiento, LocalDate fechaIngreso, double sueldoBase,
             String turnoTrabajo, double plusAntiguedad) {
-        return agregarCajero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
-                sueldoBase, turnoTrabajo, plusAntiguedad, null);
-    }
-
-    public int agregarCajero(String nombre, String apellido, long dni,
-            LocalDate fechNacimiento, LocalDate fechaIngreso, double sueldoBase,
-            String turnoTrabajo, double plusAntiguedad, UnidadVenta unidad) {
         Cajero aux = new Cajero(nombre, apellido, dni, fechNacimiento, fechaIngreso,
                 sueldoBase, turnoTrabajo, plusAntiguedad);
-        aux.setUnidad(unidad);
         return dao.agregar(aux);
+
     }
 
     public int agregarCocinero(String nombre, String apellido, long dni,

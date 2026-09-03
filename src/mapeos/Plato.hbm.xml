@@ -9,10 +9,12 @@
 	    	<generator class="identity"/>
 	    </id>
 	    <!-- Atributos - Columnas -->
-	    <property name="nombre" column="nombre" type="string" not-null="true"/>
 	    <property name="precioVenta" column="precioVenta" type="double" not-null="true"/>
 	    <property name="costoProduccion" column="costoProduccion" type="double" not-null="true"/>
 	    
-	    <many-to-one name="unidad" class="datos.UnidadVenta" column="idUnidadVenta" not-null="true"/>
+	    <properties name="nombreYUnidad" unique="true">
+			<property name="nombre" column="nombre" type="string" not-null="true"/>
+			<many-to-one name="unidad" class="datos.UnidadVenta" column="idUnidadVenta" not-null="false"/>
+		</properties>
 	</class>
 </hibernate-mapping>

@@ -54,5 +54,23 @@ public class UnidadVentaABM {
 	public List<UnidadVenta> traerUnidadVenta() {
 		return dao.traer();
 	}
+
+	public void existePlatoEnUnidadVenta(long idPlato, long idUnidadVenta) {
+		dao.existePlatoEnUnidadVenta(idPlato, idUnidadVenta);
+	}
+	
+	public void agregarPlatoAUnidadVenta(long idPlato, long idUnidadVenta) {
+		try {
+			if(dao.existePlatoEnUnidadVenta(idPlato, idUnidadVenta)) {
+				throw new IllegalArgumentException("El plato ya existe en la unidad de venta");
+			}
+			if(!dao.existePlatoSinUnidadVenta(idPlato)) {
+				throw new IllegalArgumentException("El plato ya está asignado a otra unidad de venta");
+			}
+			dao.agregarPlato(idPlato, idUnidadVenta);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
 	
 }
