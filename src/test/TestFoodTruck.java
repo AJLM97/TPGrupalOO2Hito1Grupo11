@@ -2,8 +2,6 @@ package test;
 
 import java.time.LocalDate;
 
-import datos.Festival;
-import datos.FoodTruck;
 import negocio.EmpleadoABM;
 import negocio.FestivalABM;
 import negocio.UnidadVentaABM;

@@ -6,7 +6,6 @@ import dao.UnidadVentaDao;
 import datos.Empleado;
 import datos.Festival;
 import datos.FoodTruck;
-import datos.Plato;
 import datos.PuestoDesarmable;
 import datos.UnidadVenta;
 
