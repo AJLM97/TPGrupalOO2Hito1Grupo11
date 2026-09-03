@@ -41,6 +41,11 @@ public class FestivalABM {
 		return aux;
 	}
 
+	public Festival traerFestivalYUnidades(long idFestival) {
+		Festival aux = dao.traerFestivalYUnidades(idFestival);
+		return aux;
+	}
+
 	public List<Festival> traerFestival() {
 		return dao.traer();
 	}
