@@ -199,4 +199,16 @@ public class UnidadVentaDao {
 		return resultado;
 	}
 	
+	public List<UnidadVenta> traerUnidadVentaConResponsable() throws HibernateException{
+		List<UnidadVenta> lst = null;
+		try {
+			iniciaOperacion();
+			String hql = "from UnidadVenta u inner join fetch u.responsable";
+			lst = session.createQuery(hql, UnidadVenta.class).getResultList();
+		}finally {
+			session.close();
+		}
+		return lst;
+	}
+	
 }

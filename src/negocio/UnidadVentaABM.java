@@ -73,4 +73,9 @@ public class UnidadVentaABM {
 		}
 	}
 	
+	public List<UnidadVenta> traerUnidadVentaConResponsable() {
+		UnidadVentaDao dao = UnidadVentaDao.getInstance();
+		return dao.traerUnidadVentaConResponsable();
+	}
+	
 }
