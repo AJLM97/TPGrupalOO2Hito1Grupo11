@@ -23,4 +23,4 @@ Este software permite gestionar los festivales temáticos de "Epicentro Gourmet"
 4. Ejecutar `src/test/TestAgregarPlato.java`.
 5. Ejecutar `src/test/TestAgregarPlatoAUnidadVenta.java`.
 6. Ejecutar `src/test/TestAgregarPedido.java`.
-7. Ejecutar `src/test/TestAgregarPedidoAUnidadVenta.java`.
+7. Ejecutar `src/test/TestAgregarItemPedido.java`.
