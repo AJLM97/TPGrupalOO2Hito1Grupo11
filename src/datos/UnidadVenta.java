@@ -124,7 +124,7 @@ public abstract class UnidadVenta {
 	@Override
 	public String toString() {
 		return "idUnidadVenta=" + idUnidadVenta + ", nombreComercial=" + nombreComercial + ", codigo="
-				+ codigo + ", superficie=" + superficie + ", responsable=" + responsable;
+				+ codigo + ", superficie=" + superficie + ", responsable=" + responsable.getNombre()  + " " + responsable.getApellido();
 	}
 
 }
