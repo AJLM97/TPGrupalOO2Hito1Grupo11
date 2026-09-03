@@ -11,12 +11,12 @@ public class TestTraerPedidoYItemPedido {
 	public static void main(String[] args) {
 		System.out.println("=== TestTraerPedidoYItemPedido ===");
 
-		PedidoABM pedidoABM = PedidoABM.getInstancia();
+		PedidoABM peABM = PedidoABM.getInstancia();
 
 		try {
-			Pedido pedido = pedidoABM.traerPedidoYItemPedidos(1L);
-			System.out.println("Pedido: " + pedido);
-			System.out.println("Estado cerrado: " + pedido.isCerrado());
+			Pedido pedido = peABM.traerPedidoYItemPedidos(1L);  // 2026/09/05 - Pizzas Ledesma
+			System.out.println("Pedido ID " + pedido.getIdPedido());
+			System.out.println(pedido);
 
 			Set<ItemPedido> items = pedido.getItems();
 			if (items != null && !items.isEmpty()) {

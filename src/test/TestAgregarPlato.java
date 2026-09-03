@@ -5,6 +5,8 @@ import negocio.PlatoABM;
 public class TestAgregarPlato {
 
 	public static void main(String[] args) {
+		System.out.println("=== TestAgregarPlato ===");
+		
 		PlatoABM platoABM = PlatoABM.getInstancia();
 
 		try {
@@ -113,6 +115,22 @@ public class TestAgregarPlato {
 
         try {
 			long idPlato = platoABM.agregar("Pizza napolitana", 1500, 650);
+			System.out.printf("Id Plato: %d", idPlato);
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			long idPlato = platoABM.agregar("Nigiri", 520, 200);
+			System.out.printf("Id Plato: %d", idPlato);
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			long idPlato = platoABM.agregar("Tempura", 380, 140);
 			System.out.printf("Id Plato: %d", idPlato);
 
 		} catch(Exception e) {

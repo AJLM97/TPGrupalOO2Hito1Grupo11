@@ -7,7 +7,9 @@ import negocio.EmpleadoABM;
 public class TestAgregarEmpleado {
 
 	public static void main(String[] args) {
-		EmpleadoABM eABM = EmpleadoABM.getInstancia();
+		System.out.println("=== TestAgregarEmpleado ===");
+        
+        EmpleadoABM eABM = EmpleadoABM.getInstancia();
 		
 		try {
 			long idEmpleado = eABM.agregarCajero("Alejandro", "Ledesma", 40389074, LocalDate.of(1997, 6, 18), LocalDate.of(2021, 6, 22), 700000, "Mañana", 500);
@@ -43,6 +45,14 @@ public class TestAgregarEmpleado {
 
         try {
             long idEmpleado = eABM.agregarCajero("Carlos", "Rodríguez", 40389078, LocalDate.of(2001, 10, 30), LocalDate.of(2021, 6, 22), 50, "Tarde", 900);
+            System.out.printf("Id Empleado: %d", idEmpleado);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            long idEmpleado = eABM.agregarCajero( "Carlos", "López", 31000555, LocalDate.of(1988, 11, 18), LocalDate.of(2022, 3, 20), 31000, "Mañana", 2100);
             System.out.printf("Id Empleado: %d", idEmpleado);
 
         } catch(Exception e) {

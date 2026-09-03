@@ -10,21 +10,36 @@ public class TestAgregarItemPedido {
 	public static void main(String[] args) {
 		System.out.println("=== TestAgregarItemPedido ===");
 
-		PedidoABM pedidoABM = PedidoABM.getInstancia();
-		PlatoABM platoABM = PlatoABM.getInstancia();
+		PedidoABM peABM = PedidoABM.getInstancia();
+		PlatoABM pABM = PlatoABM.getInstancia();
+
+		long idPedidoA = 1L; // 2026/09/05 - Pizzas Ledesma
+		long idPedidoB = 2L; // 2026/09/05 - Sushi Express
 
 		try {
-			Plato plato1 = platoABM.traerPlato(7L);
-			Plato plato2 = platoABM.traerPlato(12L);
-			Plato plato3 = platoABM.traerPlato(14L);
+			Plato platoA = pABM.traerPlato(7L); // Pizza fugazzeta
+			Plato platoB = pABM.traerPlato(12L); // Pizza margarita
+			Plato platoC = pABM.traerPlato(14L); // Pizza napolitana
 
-			long idPedido = 1L;
+			peABM.agregarItemPedido(idPedidoA, new ItemPedido(platoA, 2));
+			peABM.agregarItemPedido(idPedidoA, new ItemPedido(platoB, 3));
+			peABM.agregarItemPedido(idPedidoA, new ItemPedido(platoC, 1));
 
-			pedidoABM.agregarItemPedido(idPedido, new ItemPedido(plato1, 2));
-			pedidoABM.agregarItemPedido(idPedido, new ItemPedido(plato2, 3));
-			pedidoABM.agregarItemPedido(idPedido, new ItemPedido(plato3, 1));
+			System.out.println("Se agregaron 3 items al pedido con id: " + idPedidoA);
+			peABM.cerrarPedido(idPedidoA);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-			System.out.println("Se agregaron 3 items al pedido con id: " + idPedido);
+		try {
+			Plato platoA = pABM.traerPlato(15L); // Nigiri
+			Plato platoB = pABM.traerPlato(16L); // Tempura
+
+			peABM.agregarItemPedido(idPedidoB, new ItemPedido(platoA, 2));
+			peABM.agregarItemPedido(idPedidoB, new ItemPedido(platoB, 3));
+
+			System.out.println("Se agregaron 3 items al pedido con id: " + idPedidoB);
+			peABM.cerrarPedido(idPedidoB);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
