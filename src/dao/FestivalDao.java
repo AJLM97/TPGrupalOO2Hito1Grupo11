@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.Festival;
+import datos.UnidadVenta;
 
 public class FestivalDao {
 	private static Session session;
@@ -79,7 +80,7 @@ public class FestivalDao {
 		Festival objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Festival) session.createQuery("from Festival c where c.idFestival=:idFestival")
+			objeto = (Festival) session.createQuery("from Festival f where f.idFestival=:idFestival")
 						.setParameter("idFestival", idFestival).uniqueResult();
 		} finally {
 			session.close();
@@ -102,9 +103,13 @@ public class FestivalDao {
 		Festival objeto = null;
         try {
             iniciaOperacion();
-            objeto=(Festival) session.createQuery("from Festival c where c.idFestival=:idFestival")
+            objeto=(Festival) session.createQuery("from Festival f where f.idFestival=:idFestival")
             		.setParameter("idFestival", idFestival).uniqueResult();
             Hibernate.initialize(objeto.getUnidades());
+
+			for (UnidadVenta u : objeto.getUnidades()) {
+				Hibernate.initialize(u.getResponsable());
+			}
         }
  		finally {
  			session.close();
